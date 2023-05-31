@@ -5,7 +5,7 @@ import { urlForImage } from "../../sanity/lib/image";
 import Image from "next/image";
 import { getProducts } from "../../sanity/lib/client";
 
-export default async function Products() {
+export default async function Products(){
   const product = await getProducts();
   return (
     <div>
