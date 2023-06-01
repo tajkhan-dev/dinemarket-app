@@ -49,7 +49,7 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
         <p>Select Size</p>
         <div className="flex gap-3">
           {size.map((s) => (
-            <button className="text-[#666666] rounded-full hover:bg-gray-100 p-[10px] hover:shadow-lg">
+            <button key={s} className="text-[#666666] rounded-full hover:bg-gray-100 p-[10px] hover:shadow-lg">
               {s}
             </button>
           ))}
