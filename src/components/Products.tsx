@@ -1,21 +1,33 @@
+"use client"
 import React from "react";
+import { useEffect ,useState } from "react";
 import Link from "next/link";
 import { urlForImage } from "../../sanity/lib/image";
 
 import Image from "next/image";
 import { getProducts } from "../../sanity/lib/client";
+import { product } from "../../sanity/types/product";
 
-export default async function Products(){
-  const product = await getProducts();
+
+export default function Products(){
+  const [data,setdata]=useState< product[]>([])
+  useEffect(()=>{
+     const getdata=async()=>{
+
+       const product = await getProducts();
+       setdata(product)
+     };
+     getdata()
+     },[]);
   return (
     <div>
       <div className="text-center mt-20 mb-5">
         <p className="text-[#0062F7] font-semibold mb-5">Hello</p>
         <h1 className="text-[35px] font-extrabold">Check What We Have</h1>
       </div>
-      <div>
-        <div className="carousel mx-14 rounded-box flex gap-x-10 ">
-          {product.map((prod) => (
+     
+         <div className="carousel mx-14 rounded-box flex gap-x-10 ">
+          {data.map((prod) => (
             <Link
               className="carousel-item"
               href={`/products/${prod.slug}`}
@@ -33,8 +45,8 @@ export default async function Products(){
               </div>
             </Link>
           ))}
-        </div>
-      </div>
+         </div>
+      
     </div>
   );
 }

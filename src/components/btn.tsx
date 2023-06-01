@@ -16,14 +16,7 @@ export default function Btn() {
     }
   return (
     <>
-    <div className='flex'>
-        quantity
-        <AiOutlineMinusCircle onClick={dec} />
-        {quan}
-        <AiOutlinePlusCircle onClick={inc} />
-
-        
-    </div>
+    
     </>
   )
 }

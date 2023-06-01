@@ -1,11 +1,9 @@
-import React, { use } from "react";
-import Image from "next/image";
-import { useState } from "react";
+import React from "react";
+
 import { getproduct } from "../../../../sanity/lib/client";
-import { urlForImage } from "../../../../sanity/lib/image";
-import { BsCart } from "@/components/Icon";
-import { Btn } from "@/components/Comp";
-const size = ["XS", "SM", "MD", "LG", "XL"];
+
+import {Oneproduct} from "@/components/Oneproduct";
+
 
 interface props {
   params: { product: string };
@@ -17,36 +15,8 @@ export default async function page({ params }: props) {
   
   return (
     <>
-      <div>
-        <Image
-          src={`${urlForImage(prod.image)}`}
-          height={0}
-          width={550}
-          alt=""
-        />
-      </div>
-      <div>
-        <p className="font-semibold text-2xl tracking-widest">{prod.name}</p>
-        <p>Select Size</p>
-         <div className="flex gap-3">
-          {size.map((s) => (
-            <button
-              className="text-[#666666] rounded-full hover:bg-gray-100 p-[10px] hover:shadow-lg">
-              {s}
-            </button>
-          ))}
-        </div>
-        <div>
-          <Btn />
-        </div>
-
-        <div className="flex items-center ">
-          <button className="bg-black p-2 text-center text-white ">
-            Add to Cart
-          </button>
-          <p className="font-bold text-xl">{prod.price}</p>
-        </div>
-      </div>
+    <Oneproduct prod={prod} />
+     
 
       <div className="flex flex-col my-10  items-center  w-full">
         <h1 className="font-bold text-2xl text-start ">Product information</h1>
