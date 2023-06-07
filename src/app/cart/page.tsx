@@ -1,4 +1,6 @@
+"use client"
 import { AiOutlineShopping } from "@/components/Icon";
+
 
 import React from "react";
  async function cartItems() {
