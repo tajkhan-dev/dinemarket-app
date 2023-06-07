@@ -43,7 +43,7 @@ export default function Navbar() {
         <div>
           <SignedIn>
           
-            <UserButton afterSignOutUrl="http://localhost:3000" />
+            <UserButton afterSignOutUrl="/" />
           </SignedIn>
           <SignedOut>
             <SignInButton mode="modal">
