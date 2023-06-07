@@ -1,7 +1,7 @@
 import { AiOutlineShopping } from "@/components/Icon";
 
 import React from "react";
-export async function cartItems() {
+ async function cartItems() {
   try {
     const res = await fetch("/api/cart", {
       method: "GET",
