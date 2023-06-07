@@ -5,7 +5,11 @@ export async function GET(request:NextRequest){
   try{
     const items= await db.select().from(cartTable)
      console.log(items)
-     return NextResponse.json({items})
+     return NextResponse.json({items},{
+      headers:{
+        "Access-Control_Allow-Origin":'*'
+      }
+     })
   }catch(error){
     console.log(error)
   }
