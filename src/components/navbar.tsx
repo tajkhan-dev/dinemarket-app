@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="flex justify-around mt-2">
         <div className="p-2">
           <Link href={"/"}>
-            <Image src={"/logo.webp "} alt=" " height={0} width={150} />
+            <Image src={"/logo.webp"} alt=" " height={0} width={150} />
           </Link>
         </div>
         <div className="flex ">
