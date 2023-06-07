@@ -7,7 +7,7 @@ export async function GET(request:NextRequest){
      console.log(items)
      return NextResponse.json({items},{
       headers:{
-        "Access-Control_Allow-Origin":'*'
+        "Access-Control-Allow-Origin":'*'
       }
      })
   }catch(error){
