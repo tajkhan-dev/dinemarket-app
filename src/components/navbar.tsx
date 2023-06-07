@@ -1,20 +1,25 @@
-import React from "react";
+
+
 import Image from "next/image";
 import Link from "next/link";
 import { BsCart, CiSearch } from "./Icon";
+import { SignedIn, SignedOut, } from "@clerk/nextjs/app-beta";
+import { SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
   return (
     <>
       <div className="flex justify-around mt-2">
         <div className="p-2">
-          <Image src={"/logo.webp "} alt=" " height={0} width={150} />
+          <Link href={"/"}>
+            <Image src={"/logo.webp "} alt=" " height={0} width={150} />
+          </Link>
         </div>
         <div className="flex ">
-          <Link className="py-2  px-4 text-md" href={""}>
+          <Link className="py-2  px-4 text-md" href={"/female"}>
             Female
           </Link>
-          <Link className="py-2  px-4 text-md" href={""}>
+          <Link className="py-2  px-4 text-md" href={"/male"}>
             Male
           </Link>
           <Link className="py-2  px-4 text-md" href={""}>
@@ -26,6 +31,7 @@ export default function Navbar() {
         </div>
         <div className=" h-[25px] mt-[10px] flex rounded-md  border">
           <CiSearch size={20} />
+
           <input
             className=""
             type="search"
@@ -34,12 +40,23 @@ export default function Navbar() {
             id=""
           />
         </div>
+        <div>
+          <SignedIn>
+          
+            <UserButton afterSignOutUrl="http://localhost:3000" />
+          </SignedIn>
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button >Sign In</button>
+            </SignInButton>
+          </SignedOut>
+        </div>
         <div className="rounded-full bg-gray-200 p-3">
-          <BsCart size={20} />
+          <Link href={"/cart"}>
+            <BsCart size={20} />
+          </Link>
         </div>
       </div>
     </>
   );
 }
-
-

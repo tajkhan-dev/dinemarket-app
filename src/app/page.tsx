@@ -1,5 +1,5 @@
-import React from "react";
-import { Hero, Navbar, Products, Promotion, Footer, Main2 } from "../components/Comp";
+
+import { Hero,  Products, Promotion, Main2 } from "../components/Comp"
 
 export default function page() {
   return (

@@ -5,5 +5,6 @@ export type product={
     slug:string,
     price:number,
     image:Image,
+    tags:string
     
 }

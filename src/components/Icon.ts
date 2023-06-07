@@ -1,7 +1,8 @@
 import {CiSearch} from 'react-icons/ci'
 import {BsCart} from 'react-icons/bs'
-import {AiOutlineMinusCircle,AiOutlinePlusCircle} from 'react-icons/ai'
+import {AiOutlineMinusCircle,AiOutlinePlusCircle,AiOutlineShopping} from 'react-icons/ai'
 import {FaTwitter ,FaFacebookF,FaLinkedinIn} from 'react-icons/fa'
+import {RiDeleteBinLine} from 'react-icons/ri'
 export{
     CiSearch,
     BsCart,
@@ -9,5 +10,7 @@ export{
     FaFacebookF,
     FaLinkedinIn,
     AiOutlineMinusCircle,
-    AiOutlinePlusCircle
+    AiOutlinePlusCircle,
+    RiDeleteBinLine,
+    AiOutlineShopping
 }

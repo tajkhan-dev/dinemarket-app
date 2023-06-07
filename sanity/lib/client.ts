@@ -1,6 +1,6 @@
 import { createClient, groq } from "next-sanity";
 
-import { apiVersion, dataset, projectId } from "../env";
+import { apiVersion, dataset, projectId, useCdn } from "../env";
 import { product } from "../types/product";
 
 export async function getProducts(): Promise<product[]> {
@@ -17,7 +17,8 @@ export async function getProducts(): Promise<product[]> {
     name,
     "slug": slug.current,
     price,
-    image
+    image,
+    tags
    
    
   }
@@ -29,7 +30,7 @@ export async function getproduct(slug: string): Promise<product> {
     apiVersion,
     dataset,
     projectId,
-    useCdn:false
+    useCdn
   });
 
   return await client.fetch(
@@ -40,9 +41,55 @@ export async function getproduct(slug: string): Promise<product> {
     name,
     price,
     image,
+    tags
    
    
   }`,
     { slug }
   );
+}
+
+
+export async function getFemaleProducts():Promise<product[]>{
+  const client = createClient({
+    apiVersion,
+    dataset,
+    projectId,
+    useCdn
+  });
+  return await client.fetch(
+    groq`
+    *[_type=='product' && category=='Female']{
+      _id,
+      name,
+      price,
+      image,
+      tags
+     
+     
+    }`
+  )
+
+}
+
+export async function getMaleProducts():Promise<product[]>{
+  const client = createClient({
+    apiVersion,
+    dataset,
+    projectId,
+    useCdn
+  });
+  return await client.fetch(
+    groq`
+    *[_type=='product' && category=='Male']{
+      _id,
+      name,
+      price,
+      image,
+      tags
+     
+     
+    }`
+  )
+
 }

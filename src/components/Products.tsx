@@ -20,7 +20,7 @@ export default function Products(){
      getdata()
      },[]);
   return (
-    <div>
+    <>
       <div className="text-center mt-20 mb-5">
         <p className="text-[#0062F7] font-semibold mb-5">Hello</p>
         <h1 className="text-[35px] font-extrabold">Check What We Have</h1>
@@ -29,11 +29,12 @@ export default function Products(){
          <div className="carousel mx-14 rounded-box flex gap-x-10 ">
           {data.map((prod) => (
             <Link
+            
               className="carousel-item"
               href={`/products/${prod.slug}`}
               key={prod._id}
             >
-              <div className=" text-center text-lg font-bold  rounded-lg">
+              <div key={prod._id} className=" text-center text-lg font-bold  rounded-lg">
                 <Image
                   src={`${urlForImage(prod.image)}`}
                   alt=""
@@ -47,6 +48,6 @@ export default function Products(){
           ))}
          </div>
       
-    </div>
+    </>
   );
 }
