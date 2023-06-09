@@ -9,7 +9,7 @@ import {
   RiDeleteBinLine,
 } from "@/components/Icon";
 
-export default function page() {
+export default function Page() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
     "/api/cart",
