@@ -19,6 +19,15 @@ export default function Page() {
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
+  if (data.items.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center">
+        <AiOutlineShopping size={150} />
+        <h1>Your shopping bag is empty</h1>
+      </div>
+    );
+  }
+
   if (itemQuantities.length === 0) {
     setItemQuantities(data.items.map((item: cartitem) => item.quantity));
   }
@@ -64,16 +73,8 @@ export default function Page() {
 
   return (
     <>
-      <div className="mx-auto">
-        {data.items.length ==0 && (
-          <div className="">
-            <AiOutlineShopping size={150} />
-            <h1>Your shopping bag is empty</h1>
-          </div>
-        )}
-      </div>
       <div className="flex justify-evenly mt-5 ">
-        <div>
+         <div>
           <h1 className="font-bold text-4xl ml-10">Shopping Cart</h1>
           {data.items.map((i: cartitem, index: number) => {
             const quantity = itemQuantities[index];
