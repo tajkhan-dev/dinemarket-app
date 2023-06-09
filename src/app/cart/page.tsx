@@ -6,20 +6,18 @@ import Image from "next/image";
 import {
   AiOutlineMinusCircle,
   AiOutlinePlusCircle,
+  AiOutlineShopping,
   RiDeleteBinLine,
 } from "@/components/Icon";
 
 export default function Page() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data, error, isLoading } = useSWR(
-    "/api/cart",
-    fetcher
-  );
+  const { data, error } = useSWR("/api/cart", fetcher);
 
   const [itemQuantities, setItemQuantities] = useState<number[]>([]);
 
   if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
+   if (!data) return <div>loading...</div>;
 
   if (itemQuantities.length === 0) {
     setItemQuantities(data.items.map((item: cartitem) => item.quantity));
@@ -67,6 +65,14 @@ export default function Page() {
 
   return (
     <>
+      <div className="mx-auto">
+        {data.items.length < 1 && (
+          <div className="">
+            <AiOutlineShopping size={150} />
+            <h1>Your shopping bag is empty</h1>
+          </div>
+        )}
+      </div>
       <div className="flex justify-evenly mt-5 ">
         <div>
           <h1 className="font-bold text-4xl ml-10">Shopping Cart</h1>

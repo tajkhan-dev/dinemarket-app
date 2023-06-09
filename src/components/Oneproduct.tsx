@@ -5,8 +5,11 @@ import Image from "next/image";
 import { urlForImage } from "../../sanity/lib/image";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "./Icon";
 import { product } from "../../sanity/types/product";
+import { toast } from "react-hot-toast";
+
 
 const size = ["XS", "SM", "MD", "LG", "XL"];
+
 
 export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
   const { isLoaded, userId } = useAuth();
@@ -22,6 +25,7 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
   }
 
   const handleAddtoCart = async () => {
+  
     try {
       const res = await fetch("/api/cart", {
         method: "POST",
@@ -36,12 +40,15 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
       });
       const result = await res.json();
       console.log(result);
+      
+      toast.success('Successfully added to cart!');
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <>
+ 
       <div className="flex justify-center gap-10 mt-20">
         <div>
           <Image
