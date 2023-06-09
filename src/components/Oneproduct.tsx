@@ -1,20 +1,17 @@
 "use client";
-import {useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import React, { FC, useState } from "react";
 import Image from "next/image";
 import { urlForImage } from "../../sanity/lib/image";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "./Icon";
 import { product } from "../../sanity/types/product";
 
-
 const size = ["XS", "SM", "MD", "LG", "XL"];
 
 export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
-  const { isLoaded, userId} = useAuth();
+  const { isLoaded, userId } = useAuth();
 
-  
-
-    const [num, setnum] = useState(1);
+  const [num, setnum] = useState(1);
   function inc() {
     setnum(num + 1);
   }
@@ -29,13 +26,12 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
       const res = await fetch("/api/cart", {
         method: "POST",
         body: JSON.stringify({
-          uid:userId,
+          uid: userId,
           quantity: num,
-          imageurl: urlForImage(prod.image).url() ,
+          imageurl: urlForImage(prod.image).url(),
           product_name: prod.name,
-          product_price:prod.price,
-          tags:prod.tags
-
+          product_price: prod.price * num,
+          tags: prod.tags,
         }),
       });
       const result = await res.json();
@@ -46,48 +42,51 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
   };
   return (
     <>
-      <div>
-        <Image
-          src={`${urlForImage(prod.image)}`}
-          height={0}
-          width={550}
-          alt=""
-        />
-      </div>
-      <div>
-        <p className="font-semibold text-2xl tracking-widest">{prod.name}</p>
-        <p>Select Size</p>
-        <div className="flex gap-3">
-          {size.map((s) => (
-            <button
-              key={s}
-              className="text-[#666666] rounded-full hover:bg-gray-100 p-[10px] hover:shadow-lg"
-            >
-              {s}
-            </button>
-          ))}
+      <div className="flex justify-center gap-10 mt-20">
+        <div>
+          <Image
+            src={urlForImage(prod.image).url()}
+            height={550}
+            width={550}
+            alt=""
+          />
         </div>
-        <div className="flex">
-          quantity
-          <AiOutlineMinusCircle onClick={dec} />
-          {num}
-          <AiOutlinePlusCircle onClick={inc} />
-        </div>
+        <div className="mt-10">
+          <p className="font-semibold text-5xl tracking-widest">{prod.name}</p>
+          <p className="tracking-widest">{prod.tags}</p>
+          <p className="font-semibold text-2xl mt-5">Select Size</p>
+          <div className="flex gap-4">
+            {size.map((s) => (
+              <button
+                key={s}
+                className="text-[#666666] font-semibold rounded-full hover:bg-gray-100 p-[10px] hover:shadow-lg"
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-2 text-lg mt-5">
+            <p className="font-semibold text-xl tracking-widest">quantity:</p>
 
-        <div className="flex items-center ">
-          {
-            userId ||isLoaded ? 
-             <button
-            onClick={handleAddtoCart}
-            className="bg-black p-2 text-center text-white "
-          >
-            Add to Cart
-          </button>
-            :<p>Sign In first</p>
-          }
-         
-          <p className="font-bold text-xl"> ${prod.price}</p>
-         
+            <AiOutlineMinusCircle size={25} onClick={dec} />
+            {num}
+            <AiOutlinePlusCircle size={25} onClick={inc} />
+          </div>
+
+          <div className="flex gap-3 items-center mt-5">
+            {userId || isLoaded ? (
+              <button
+                onClick={handleAddtoCart}
+                className="bg-black py-2 px-4 text-xl text-center text-white "
+              >
+                Add to Cart
+              </button>
+            ) : (
+              <p>Sign In first</p>
+            )}
+
+            <p className="font-bold text-2xl"> ${prod.price}</p>
+          </div>
         </div>
       </div>
     </>

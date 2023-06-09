@@ -2,8 +2,7 @@ import React from "react";
 
 import { getproduct } from "../../../../sanity/lib/client";
 
-import {Oneproduct} from "@/components/Oneproduct";
-
+import { Oneproduct } from "@/components/Oneproduct";
 
 interface props {
   params: { product: string };
@@ -12,11 +11,10 @@ interface props {
 export default async function page({ params }: props) {
   const slug = params.product;
   const prod = await getproduct(slug);
-  
+
   return (
     <>
-    <Oneproduct prod={prod} />
-     
+      <Oneproduct prod={prod} />
 
       <div className="flex flex-col my-10  items-center  w-full">
         <h1 className="font-bold text-2xl text-start ">Product information</h1>

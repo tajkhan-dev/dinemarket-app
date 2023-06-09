@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Main2() {
   return (
     <>
-      <h1 className="font-extrabold mt-[100px] text-[45px] tracking-wider leading-[60px] absolute max-w-[450px] right-[100px]">
+      <h1 className="font-extrabold mt-[100px] text-[45px] tracking-wider leading-[60px] absolute max-w-[500px] right-[100px]">
         Unique and Authentic Vintage Designer Jewellery
       </h1>
       <div className="mb-[150px] bg-[#FBFCFF] mt-[280px] flex justify-around">
@@ -43,7 +43,7 @@ export default function Main2() {
         </div>
         <div className="max-w-[550px]">
           <div className=" flex ">
-            <Image src={"/main.webp"} width={250} height={0} alt="" />
+            <Image src={"/main.webp"} width={250} height={250} alt="" />
             <div className="max-w-[300px] ">
               <p className="text-justify p-6 font-extralight tracking-wider">
                 This piece is ethically crafted in our small family-owned

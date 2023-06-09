@@ -8,7 +8,7 @@ export async function getProducts(): Promise<product[]> {
     apiVersion,
     dataset,
     projectId,
-    useCdn:false
+    useCdn,
   });
 
   return await client.fetch(groq`
@@ -30,7 +30,7 @@ export async function getproduct(slug: string): Promise<product> {
     apiVersion,
     dataset,
     projectId,
-    useCdn
+    useCdn,
   });
 
   return await client.fetch(
@@ -49,47 +49,46 @@ export async function getproduct(slug: string): Promise<product> {
   );
 }
 
-
-export async function getFemaleProducts():Promise<product[]>{
+export async function getFemaleProducts(): Promise<product[]> {
   const client = createClient({
     apiVersion,
     dataset,
     projectId,
-    useCdn
+    useCdn,
   });
   return await client.fetch(
     groq`
     *[_type=='product' && category=='Female']{
       _id,
       name,
+      "slug": slug.current,
       price,
       image,
       tags
      
      
     }`
-  )
-
+  );
 }
 
-export async function getMaleProducts():Promise<product[]>{
+export async function getMaleProducts(): Promise<product[]> {
   const client = createClient({
     apiVersion,
     dataset,
     projectId,
-    useCdn
+    useCdn,
   });
   return await client.fetch(
     groq`
     *[_type=='product' && category=='Male']{
       _id,
       name,
+      "slug": slug.current,
       price,
       image,
       tags
      
      
     }`
-  )
-
+  );
 }

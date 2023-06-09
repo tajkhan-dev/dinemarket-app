@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 
 export default function Promotion() {
@@ -15,7 +14,7 @@ export default function Promotion() {
               <p className="  text-[40px] font-bold">Get UP to 60%</p>
               <p>for the summer season</p>
             </div>
-            <Image src={"/event1.webp"} alt="event1" width={260} height={0} />
+            <Image src={"/event1.webp"} width={260} height={260} alt="event1" />
           </div>
 
           <div className=" mt-5 text-center text-white p-2  h-[200px]  bg-[#212121] max-w-[600px] mx-auto ">
@@ -32,14 +31,14 @@ export default function Promotion() {
           <p>
             <del>$100</del> <ins>$75:00</ins>
           </p>
-          <Image src={"/event2.webp"} alt={""} width={275} height={0} />
+          <Image src={"/event2.webp"} width={275} height={275} alt={""} />
         </div>
         <div className="bg-[#D6D6D8] h-[420px] max-w-[300px]">
           <p>Flex Push Buttpn Bomber</p>
           <p>
             <del>$225</del> <ins className="font-bold">$190:00</ins>
           </p>
-          <Image src={"/event3.webp"} alt={""} width={275} height={0} />
+          <Image src={"/event3.webp"} width={275} height={275} alt={""} />
         </div>
       </div>
     </>

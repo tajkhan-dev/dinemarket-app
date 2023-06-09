@@ -22,12 +22,12 @@ export default function Hero() {
             Start Shopping
           </button>
           <div className="flex justify-between mt-5">
-            <Image src={"/Featured1.webp"} alt="" width={100} height={0} />
-            <Image src={"/Featured2.webp"} alt="" width={100} height={0} />
+            <Image src={"/Featured1.webp"} alt="" width={100} height={100} />
+            <Image src={"/Featured2.webp"} alt="" width={100} height={100} />
 
-            <Image src={"/Featured3.webp"} alt="" width={100} height={0} />
+            <Image src={"/Featured3.webp"} alt="" width={100} height={100} />
 
-            <Image src={"/Featured4.webp"} alt="" width={100} height={0} />
+            <Image src={"/Featured4.webp"} alt="" width={100} height={100} />
           </div>
         </div>
         <div className="rounded-full bg-[#FFECE3] mt-[22px]">
@@ -35,7 +35,7 @@ export default function Hero() {
             src={"/header.webp"}
             className="z-10"
             alt=""
-            height={0}
+            height={570}
             width={570}
           />
         </div>
