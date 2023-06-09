@@ -1,7 +1,7 @@
 "use client";
 import { cartitem } from "@/components/types";
 import React, { useState } from "react";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 import Image from "next/image";
 import {
   AiOutlineMinusCircle,
@@ -12,7 +12,7 @@ import {
 
 export default function Page() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data, error } = useSWR("/api/cart", fetcher);
+  const { data, error, mutate } = useSWR("/api/cart", fetcher);
 
   const [itemQuantities, setItemQuantities] = useState<number[]>([]);
 
@@ -54,7 +54,6 @@ export default function Page() {
 
       const result = await res.json();
       if (res.ok) {
-        mutate("/api/cart");
       } else {
         console.log("Failed to delete item:", res.status);
       }
@@ -62,19 +61,17 @@ export default function Page() {
       console.log("Failed to delete item:", error);
     }
   };
-  if (data.items.length === 0) {
-    return (
-      <div className="mx-auto text-center">
-        <h1 className="font-bold text-4xl mt-10">Shopping Cart</h1>
-        <p className="text-2xl mt-5">Your cart is empty.</p>
-        <p className="text-xl mt-2">Start adding items to your cart.</p>
-      </div>
-    );
-  }
 
   return (
     <>
-      <div className="mx-auto"></div>
+      <div className="mx-auto">
+        {data.items.length ==0 && (
+          <div className="">
+            <AiOutlineShopping size={150} />
+            <h1>Your shopping bag is empty</h1>
+          </div>
+        )}
+      </div>
       <div className="flex justify-evenly mt-5 ">
         <div>
           <h1 className="font-bold text-4xl ml-10">Shopping Cart</h1>
@@ -99,7 +96,10 @@ export default function Page() {
                       <RiDeleteBinLine
                         size={30}
                         fill={"#CC0000"}
-                        onClick={() => deleteItem(i.id)}
+                        onClick={() => {
+                          deleteItem(i.id);
+                          mutate();
+                        }}
                       />
 
                       <div className="flex gap-2 text-lg mt-5">
