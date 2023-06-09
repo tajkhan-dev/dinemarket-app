@@ -17,7 +17,7 @@ export default function Page() {
   const [itemQuantities, setItemQuantities] = useState<number[]>([]);
 
   if (error) return <div>failed to load</div>;
-   if (!data) return <div>loading...</div>;
+  if (!data) return <div>loading...</div>;
 
   if (itemQuantities.length === 0) {
     setItemQuantities(data.items.map((item: cartitem) => item.quantity));
@@ -66,7 +66,7 @@ export default function Page() {
   return (
     <>
       <div className="mx-auto">
-        {data.items.length < 1 && (
+        {!data && (
           <div className="">
             <AiOutlineShopping size={150} />
             <h1>Your shopping bag is empty</h1>
