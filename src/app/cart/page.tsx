@@ -62,17 +62,19 @@ export default function Page() {
       console.log("Failed to delete item:", error);
     }
   };
+  if (data.items.length === 0) {
+    return (
+      <div className="mx-auto text-center">
+        <h1 className="font-bold text-4xl mt-10">Shopping Cart</h1>
+        <p className="text-2xl mt-5">Your cart is empty.</p>
+        <p className="text-xl mt-2">Start adding items to your cart.</p>
+      </div>
+    );
+  }
 
   return (
     <>
-      <div className="mx-auto">
-        {!data && (
-          <div className="">
-            <AiOutlineShopping size={150} />
-            <h1>Your shopping bag is empty</h1>
-          </div>
-        )}
-      </div>
+      <div className="mx-auto"></div>
       <div className="flex justify-evenly mt-5 ">
         <div>
           <h1 className="font-bold text-4xl ml-10">Shopping Cart</h1>
