@@ -1,6 +1,6 @@
 "use client";
 import { cartitem } from "@/components/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import {
@@ -9,8 +9,11 @@ import {
   AiOutlineShopping,
   RiDeleteBinLine,
 } from "@/components/Icon";
+import axios from "axios";
+import { checkout } from "@/components/checkout";
 
 export default function Page() {
+  let result: any;
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, mutate } = useSWR("/api/cart", fetcher);
 
@@ -21,9 +24,9 @@ export default function Page() {
 
   if (data.items.length === 0) {
     return (
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center mt-20 items-center">
         <AiOutlineShopping size={150} />
-        <h1>Your shopping bag is empty</h1>
+        <h1 className="text-2xl">Your shopping bag is empty</h1>
       </div>
     );
   }
@@ -71,10 +74,28 @@ export default function Page() {
     }
   };
 
+  const Fetchprices = async () => {
+    try {
+      const prices = await fetch("/api/getproducts", {
+        method: "GET",
+      });
+      result = await prices.json();
+
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  Fetchprices();
+  const handleCheckOut = (e: any) => {
+    e.preventDefault();
+    checkout(result);
+  };
+
   return (
     <>
       <div className="flex justify-evenly mt-5 ">
-         <div>
+        <div>
           <h1 className="font-bold text-4xl ml-10">Shopping Cart</h1>
           {data.items.map((i: cartitem, index: number) => {
             const quantity = itemQuantities[index];
@@ -133,7 +154,10 @@ export default function Page() {
             <p className="font-bold">${totalPrice}</p>
           </div>
           <div>
-            <button className="px-4 py-2 bg-black text-white">
+            <button
+              onClick={handleCheckOut}
+              className="px-4 py-2 bg-black text-white"
+            >
               Proceed to Checkout
             </button>
           </div>

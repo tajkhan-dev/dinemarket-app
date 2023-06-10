@@ -40,6 +40,11 @@ export default function Navbar() {
             id=""
           />
         </div>
+        <div className="rounded-full bg-gray-200 p-3">
+          <Link href={"/cart"}>
+            <BsCart size={20} />
+          </Link>
+        </div>
         <div>
           <SignedIn>
            <UserButton afterSignOutUrl="/" />
@@ -49,11 +54,6 @@ export default function Navbar() {
               <button >Sign In</button>
             </SignInButton>
           </SignedOut>
-        </div>
-        <div className="rounded-full bg-gray-200 p-3">
-          <Link href={"/cart"}>
-            <BsCart size={20} />
-          </Link>
         </div>
       </div>
     </>
