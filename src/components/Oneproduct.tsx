@@ -59,7 +59,7 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
           />
         </div>
         <div className="mt-10">
-          <p className="font-semibold text-5xl tracking-widest">{prod.name}</p>
+          <p className="font-semibold text-2xl tracking-widest">{prod.name}</p>
           <p className="tracking-widest">{prod.tags}</p>
           <p className="font-semibold text-2xl mt-5">Select Size</p>
           <div className="flex gap-4">

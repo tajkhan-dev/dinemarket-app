@@ -40,7 +40,7 @@ export default function Navbar() {
             id=""
           />
         </div>
-        <div className="rounded-full bg-gray-200 p-3">
+        <div className="">
           <Link href={"/cart"}>
             <BsCart size={20} />
           </Link>
