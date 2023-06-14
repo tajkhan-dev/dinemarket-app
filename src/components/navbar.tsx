@@ -9,7 +9,7 @@ import { SignInButton, UserButton } from "@clerk/nextjs";
 export default function Navbar() {
   return (
     <>
-      <div className="flex justify-around mt-2">
+      <div className="flex justify-around mt-2 h-[30px]">
         <div className="p-2">
           <Link href={"/"}>
             <Image  src={"/logo.webp"} alt=" " height={150} width={150} />
