@@ -40,7 +40,7 @@ export default function Navbar() {
             id=""
           />
         </div>
-        <div className="">
+        <div className="h-[50px] p-2">
           <Link href={"/cart"}>
             <BsCart size={20} />
           </Link>
