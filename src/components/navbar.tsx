@@ -12,7 +12,7 @@ export default function Navbar() {
       <div className="flex justify-around mt-2">
         <div className="p-2">
           <Link href={"/"}>
-            <Image src={"/logo.webp"} alt=" " height={150} width={150} />
+            <Image  src={"/logo.webp"} alt=" " height={150} width={150} />
           </Link>
         </div>
         <div className="flex ">
@@ -22,7 +22,7 @@ export default function Navbar() {
           <Link className="py-2  px-4 text-md" href={"/male"}>
             Male
           </Link>
-          <Link className="py-2  px-4 text-md" href={""}>
+          <Link className="py-2  px-4 text-md" href={"#"}>
             Kids
           </Link>
           <Link className="py-2  px-4 text-md" href={"/products"}>
@@ -45,7 +45,7 @@ export default function Navbar() {
             <BsCart size={20} />
           </Link>
         </div>
-        <div>
+        <div className="mt-2">
           <SignedIn>
            <UserButton afterSignOutUrl="/" />
           </SignedIn>

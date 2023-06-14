@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Main2() {
   return (
@@ -51,10 +52,13 @@ export default function Main2() {
                 The Natural color is the actual natural color of the fiber,
                 undyed and 100% traceable
               </p>
-
-              <button className="bg-black rounded p-4 mx-6 mt-3 text-white ">
+              <Link href={'/products'}>
+<button className="bg-black rounded p-4 mx-6 mt-3 text-white ">
                 See All Product{" "}
               </button>
+</Link>
+
+              
             </div>
           </div>
         </div>

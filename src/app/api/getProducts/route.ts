@@ -2,34 +2,37 @@ import { NextRequest, NextResponse } from "next/server";
 
 import Stripe from "stripe";
 
-export async function GET(request: NextRequest) {
-  const stripe = new Stripe(`${process.env.STRIPE_SECRET_KEY}`, {
-    apiVersion: "2022-11-15",
-  });
-  const price = await stripe.prices.list({
-    limit: 12,
-  });
-
-  return NextResponse.json(price.data.reverse());
-}
-
 export async function POST(request: NextRequest) {
   const stripe = new Stripe(`${process.env.STRIPE_SECRET_KEY}`, {
     apiVersion: "2022-11-15",
   });
 
-  const req = await request.json();
-  const p = req.price_id;
+  const { item } = await request.json();
+
+  const data = item.map((i: any) => {
+    const transformedItem = {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: i.product_name,
+          description: "this",
+          images: [i.imageurl],
+          metadata: {},
+        },
+        unit_amount: i.product_price * 100,
+      },
+      quantity: i.quantity,
+    };
+
+    return transformedItem;
+  });
 
   const session = stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price: p,
-      },
-    ],
+    line_items: data,
+
     mode: "payment",
-    success_url: "http://localhost:3000",
-    cancel_url: "http://localhost:3000",
+    success_url: "https://dinemarket-taj-ul-islam.vercel.app/success",
+    cancel_url: "https://dinemarket-taj-ul-islam.vercel.app/cancel",
   });
-  return NextResponse.json((await session).url);
+  return NextResponse.json((await session).id);
 }

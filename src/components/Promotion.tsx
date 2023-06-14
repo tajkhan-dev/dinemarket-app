@@ -20,7 +20,7 @@ export default function Promotion() {
           <div className=" mt-5 text-center text-white p-2  h-[200px]  bg-[#212121] max-w-[600px] mx-auto ">
             <p className="text-[40px] font-bold mt-5">Get 30% Off</p>
             <p>use promo code</p>
-            <button className="bg-[#474747] rounded-lg text-lg  p-2">
+            <button className="mt-2 bg-[#474747] rounded-lg text-lg  p-2">
               DINEWEEKENDSALE
             </button>
           </div>
@@ -31,14 +31,14 @@ export default function Promotion() {
           <p>
             <del>$100</del> <ins>$75:00</ins>
           </p>
-          <Image src={"/event2.webp"} width={275} height={275} alt={""} />
+          <Image className="mt-5" src={"/event2.webp"} width={275} height={275} alt={""} />
         </div>
         <div className="bg-[#D6D6D8] h-[420px] max-w-[300px]">
           <p>Flex Push Buttpn Bomber</p>
           <p>
             <del>$225</del> <ins className="font-bold">$190:00</ins>
           </p>
-          <Image src={"/event3.webp"} width={275} height={275} alt={""} />
+          <Image  className="mt-3" src={"/event3.webp"} width={275} height={275} alt={""} />
         </div>
       </div>
     </>

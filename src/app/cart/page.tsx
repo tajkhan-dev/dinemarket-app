@@ -1,6 +1,6 @@
 "use client";
 import { cartitem } from "@/components/types";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import {
@@ -9,18 +9,17 @@ import {
   AiOutlineShopping,
   RiDeleteBinLine,
 } from "@/components/Icon";
-import axios from "axios";
-import { checkout } from "@/components/checkout";
+import Checkout from "@/components/Checkout";
 
 export default function Page() {
-  let result: any;
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, mutate } = useSWR("/api/cart", fetcher);
 
   const [itemQuantities, setItemQuantities] = useState<number[]>([]);
 
   if (error) return <div>failed to load</div>;
-  if (!data) return <div>loading...</div>;
+  if (!data)
+    return <div className="flex justify-center items-center">loading...</div>;
 
   if (data.items.length === 0) {
     return (
@@ -35,10 +34,37 @@ export default function Page() {
     setItemQuantities(data.items.map((item: cartitem) => item.quantity));
   }
 
+  const updateItem = async (itemId: number, quantity: number) => {
+    try {
+      const res = await fetch("/api/cart", {
+        method: "PATCH",
+        body: JSON.stringify({
+          id: itemId,
+          quantity: quantity,
+        }),
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        // Handle successful update
+        console.log("Item updated successfully");
+        // Optionally, you can call mutate() to refresh the data after updating
+        mutate();
+      } else {
+        console.log("Failed to update item:", res.status);
+      }
+    } catch (error) {
+      console.log("Failed to update item:", error);
+    }
+  };
+
   const increment = (index: number) => {
     const updatedQuantities = [...itemQuantities];
     updatedQuantities[index] += 1;
     setItemQuantities(updatedQuantities);
+
+    const item = data.items[index];
+    updateItem(item.id, updatedQuantities[index]);
   };
 
   const decrement = (index: number) => {
@@ -47,9 +73,13 @@ export default function Page() {
       updatedQuantities[index] -= 1;
     }
     setItemQuantities(updatedQuantities);
+
+    const item = data.items[index];
+
+    updateItem(item.id, updatedQuantities[index]);
   };
 
-  console.log(data);
+
   const totalPrice = data.items.reduce(
     (accumulator: any, i: any, index: any) =>
       accumulator + i.product_price * itemQuantities[index],
@@ -72,24 +102,6 @@ export default function Page() {
     } catch (error) {
       console.log("Failed to delete item:", error);
     }
-  };
-
-  const Fetchprices = async () => {
-    try {
-      const prices = await fetch("/api/getproducts", {
-        method: "GET",
-      });
-      result = await prices.json();
-
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  Fetchprices();
-  const handleCheckOut = (e: any) => {
-    e.preventDefault();
-    checkout(result);
   };
 
   return (
@@ -153,14 +165,8 @@ export default function Page() {
             <p>Sub Total :</p>
             <p className="font-bold">${totalPrice}</p>
           </div>
-          <div>
-            <button
-              onClick={handleCheckOut}
-              className="px-4 py-2 bg-black text-white"
-            >
-              Proceed to Checkout
-            </button>
-          </div>
+
+          <Checkout items={data} />
         </div>
       </div>
     </>

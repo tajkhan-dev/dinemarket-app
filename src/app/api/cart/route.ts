@@ -51,3 +51,14 @@ export async function DELETE(request: NextRequest) {
     console.log(error);
   }
 }
+
+
+export async function PATCH(request: NextRequest) {
+  const req = await request.json();
+  try {
+    const res = await db.update(cartTable).set({quantity:req.quantity}).where(eq(cartTable.id,req.id))
+    return NextResponse.json(res);
+  } catch (error) {
+    console.log(error);
+  }
+}

@@ -24,7 +24,7 @@ export default async function page() {
             <p className="font-bold text-md">{prod.name}</p>
             <p>{prod.tags}</p>
 
-            <p className="font-semibold text-xl">{prod.price}</p>
+            <p className="font-semibold text-xl">${prod.price}</p>
           </Link>
         ))}
       </div>
