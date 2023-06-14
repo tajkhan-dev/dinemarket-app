@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     mode: "payment",
     success_url: "https://dinemarket-taj-ul-islam.vercel.app/success",
-    cancel_url: "https://dinemarket-taj-ul-islam.vercel.app/cancel",
+    cancel_url: "https://dinemarket-taj-ul-islam.vercel.app",
   });
   return NextResponse.json((await session).id);
 }
