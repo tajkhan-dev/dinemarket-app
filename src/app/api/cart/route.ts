@@ -3,8 +3,9 @@ import { cartTable, db } from "../../../../lib/drizzle";
 import { eq } from "drizzle-orm";
 
 export async function GET(request: NextRequest) {
+  const req = await request.json();
   try {
-    const items = await db.select().from(cartTable);
+    const items = await db.select().from(cartTable).where(eq(cartTable.uid,req.uid));
 
     return NextResponse.json(
       { items },

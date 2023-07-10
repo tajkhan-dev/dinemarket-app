@@ -3,8 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BsCart, CiSearch } from "./Icon";
-import { SignedIn, SignedOut, } from "@clerk/nextjs/app-beta";
-import { SignInButton, UserButton } from "@clerk/nextjs";
+
+import { UserButton } from "@clerk/nextjs";
+
+import { SignedOut,SignedIn } from "@clerk/nextjs";
+import { SignInButton } from "@clerk/nextjs";
+ 
 
 export default function Navbar() {
   return (
