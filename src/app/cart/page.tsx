@@ -10,10 +10,11 @@ import {
   RiDeleteBinLine,
 } from "@/components/Icon";
 import Checkout from "@/components/Checkout";
+import axios from "axios";
 
 export default function Page() {
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data, error, mutate } = useSWR("/api/cart", fetcher);
+  const fetcher = (url: string) => axios.get(url).then(res => res.data);
+  const { data, error, mutate } = useSWR("http://localhost:3000/api/cart", fetcher);
 
   const [itemQuantities, setItemQuantities] = useState<number[]>([]);
 

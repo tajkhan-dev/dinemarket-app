@@ -3,12 +3,13 @@ import { cartTable, db } from "../../../../lib/drizzle";
 import { eq } from "drizzle-orm";
 
 export async function GET(request: NextRequest) {
-  const req = await request.json();
-  try {
-    const items = await db.select().from(cartTable).where(eq(cartTable.uid,req.uid));
+ 
+
+    try {
+     const items = await db.select().from(cartTable);
 
     return NextResponse.json(
-      { items },
+      {items},
       {
         headers: {
           "Access-Control-Allow-Origin": "*",
