@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+
 import Stripe from "stripe";
 
 export async function POST(request: NextRequest) {
@@ -15,7 +16,7 @@ export async function POST(request: NextRequest) {
         currency: "usd",
         product_data: {
           name: i.product_name,
-          description: "this",
+          description: "",
           images: [i.imageurl],
           metadata: {},
         },
@@ -36,3 +37,5 @@ export async function POST(request: NextRequest) {
   });
   return NextResponse.json((await session).id);
 }
+
+

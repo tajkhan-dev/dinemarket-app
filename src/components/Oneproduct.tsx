@@ -5,14 +5,13 @@ import Image from "next/image";
 import { urlForImage } from "../../sanity/lib/image";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "./Icon";
 import { product } from "../../sanity/types/product";
-import { toast } from "react-hot-toast";
-
+import { Toaster, toast } from "react-hot-toast";
 
 const size = ["XS", "SM", "MD", "LG", "XL"];
 
-
 export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
   const { isLoaded, userId } = useAuth();
+
 
   const [num, setnum] = useState(1);
   function inc() {
@@ -25,7 +24,6 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
   }
 
   const handleAddtoCart = async () => {
-  
     try {
       const res = await fetch("/api/cart", {
         method: "POST",
@@ -40,16 +38,19 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
       });
       const result = await res.json();
       console.log(result);
+      if(res.ok){
+        toast.success("Added to Cart Successfully")
+      }
+     
+
       
-      toast.success('Successfully added to cart!');
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <>
- 
-      <div className="flex justify-center gap-10 mt-20">
+      <div className="min-[320px]:mx-[20px] md:flex  justify-center gap-10 mt-20">
         <div>
           <Image
             src={urlForImage(prod.image).url()}
@@ -72,7 +73,7 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
               </button>
             ))}
           </div>
-          <div className="flex gap-2 text-lg mt-5">
+            <div className="flex gap-2 text-lg mt-5">
             <p className="font-semibold text-xl tracking-widest">quantity:</p>
 
             <AiOutlineMinusCircle size={25} onClick={dec} />
@@ -81,18 +82,22 @@ export const Oneproduct: FC<{ prod: product }> = ({ prod }) => {
           </div>
 
           <div className="flex gap-3 items-center mt-5">
-            {userId || isLoaded ? (
+            {isLoaded ? (
               <button
-                onClick={handleAddtoCart}
+                onClick={()=>{
+                  handleAddtoCart()
+                  
+                }}
                 className="bg-black py-2 px-4 text-xl text-center text-white "
               >
                 Add to Cart
               </button>
             ) : (
               <p>Sign In first</p>
-            )}
+              )}
 
             <p className="font-bold text-2xl"> ${prod.price}</p>
+              <Toaster />
           </div>
         </div>
       </div>

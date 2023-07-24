@@ -21,8 +21,8 @@ export default async function page({ params }: props) {
         <hr className="w-[70%] border border-[#666666]" />
       </div>
 
-      <div className="mx-[200px]">
-        <div className=" flex gap-x-[150px] ">
+      <div className="min-[320px]:mx-[50px] md:mx-[200px]">
+        <div className=" lg:flex gap-x-[150px] ">
           <p className="text-[#666666] text-lg tracking-widest font-bold">
             PRODUCT DETAILS
           </p>
@@ -35,7 +35,7 @@ export default async function page({ params }: props) {
             architecto atque?{" "}
           </p>
         </div>
-        <div className=" flex mt-10  gap-x-[180px]">
+        <div className=" lg:flex mt-10  gap-x-[180px]">
           <p className="text-[#666666] text-lg tracking-widest font-bold">
             PRODUCT CARE
           </p>

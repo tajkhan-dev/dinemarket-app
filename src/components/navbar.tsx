@@ -1,25 +1,22 @@
-
-
-import Image from "next/image";
 import Link from "next/link";
 import { BsCart, CiSearch } from "./Icon";
 
-import { UserButton } from "@clerk/nextjs";
+import { SignedOut, SignedIn, SignInButton, UserButton } from "@clerk/nextjs";
 
-import { SignedOut,SignedIn } from "@clerk/nextjs";
-import { SignInButton } from "@clerk/nextjs";
- 
+import Ham from "./ham";
 
 export default function Navbar() {
   return (
     <>
-      <div className="flex justify-around mt-2 h-[40px]">
+      <div className="flex lg:justify-around items-center justify-between mt-2 h-[40px]">
         <div className=" ">
           <Link href={"/"}>
-            <h1 className="font-bold text-[30px] leading-none">Dine Market</h1>
+            <h1 className="font-bold text-[20px] md:text-[30px] leading-none">
+              Dine Market
+            </h1>
           </Link>
         </div>
-        <div className="flex ">
+        <div className="hidden lg:flex ">
           <Link className="py-2  px-4 text-md" href={"/female"}>
             Female
           </Link>
@@ -33,7 +30,7 @@ export default function Navbar() {
             All Products
           </Link>
         </div>
-        <div className=" h-[25px] mt-[10px] flex rounded-md  border">
+        <div className="hidden h-[25px] mt-[10px] lg:flex rounded-md  border">
           <CiSearch size={20} />
 
           <input
@@ -44,20 +41,21 @@ export default function Navbar() {
             id=""
           />
         </div>
-        <div className="h-[50px] p-2">
+
+        <div className=" hidden lg:flex items-center gap-3 md:mt-2">
           <Link href={"/cart"}>
-            <BsCart size={20} />
+            <BsCart size={25} />
           </Link>
-        </div>
-        <div className="mt-2">
+
           <SignedIn>
-           <UserButton afterSignOutUrl="/" />
+            <UserButton afterSignOutUrl="/" />
           </SignedIn>
           <SignedOut>
-            <SignInButton mode="modal">
-              <button >Sign In</button>
-            </SignInButton>
+            <SignInButton mode="modal" />
           </SignedOut>
+        </div>
+        <div className="lg:hidden">
+          <Ham />
         </div>
       </div>
     </>

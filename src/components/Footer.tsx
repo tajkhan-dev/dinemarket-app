@@ -5,7 +5,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn } from "./Icon";
 export default function Footer() {
   return (
     <>
-      <div className="flex justify-around  mt-[200px]">
+      <div className=" md:flex justify-around  md:mt-[200px]">
         <div className="max-w-[300px] ">
           <Image src={"/logo.webp"} alt="" width={200} height={0} />
           <p className="font-light mt-10">

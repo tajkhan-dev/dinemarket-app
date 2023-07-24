@@ -24,14 +24,14 @@ export default function Products() {
         <h1 className="text-[35px] font-extrabold">Check What We Have</h1>
       </div>
 
-      <div className="carousel mx-14 rounded-box flex gap-x-10 ">
+      <div className="carousel min-[320px]:mx-7 md:mx-14 rounded-box flex gap-x-10 ">
         {data.map((prod, k: number) => (
           <Link
             className="carousel-item"
             href={`/products/${prod.slug}`}
             key={k}
           >
-            <div className=" text-center text-lg font-bold  rounded-lg">
+            <div className=" md:text-center text-lg font-bold  rounded-lg">
               <Image
                 src={urlForImage(prod.image).url()}
                 alt=""
