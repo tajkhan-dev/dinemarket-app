@@ -1,21 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cartTable, db } from "../../../../lib/drizzle";
 import { eq } from "drizzle-orm";
+import { auth } from "@clerk/nextjs";
 
 export async function GET(request: NextRequest) {
+  const { userId } = auth();
  
 
-    try {
-     const items = await db.select().from(cartTable);
+  try {
+    const items = await db
+      .select()
+      .from(cartTable)
+      .where(eq(cartTable.uid, userId!));
 
-    return NextResponse.json(
-      {items},
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    );
+    return NextResponse.json({ items },{
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+
+    });
   } catch (error) {
     console.log(error);
   }
@@ -54,11 +57,13 @@ export async function DELETE(request: NextRequest) {
   }
 }
 
-
 export async function PATCH(request: NextRequest) {
   const req = await request.json();
   try {
-    const res = await db.update(cartTable).set({quantity:req.quantity}).where(eq(cartTable.id,req.id))
+    const res = await db
+      .update(cartTable)
+      .set({ quantity: req.quantity })
+      .where(eq(cartTable.id, req.id));
     return NextResponse.json(res);
   } catch (error) {
     console.log(error);
